@@ -7,9 +7,6 @@ const stackNavigator = createStackNavigator(
   {
     Login: { screen: Login },
     Feed: { screen: Feed }
-  },
-  {
-    initialRouteName: 'Login'
   }
 );
 
