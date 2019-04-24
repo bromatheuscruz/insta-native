@@ -5,8 +5,18 @@ import Feed from './src/screens/Feed';
 
 const stackNavigator = createStackNavigator(
   {
-    Login: { screen: Login },
-    Feed: { screen: Feed }
+    Login: {
+      screen: Login,
+      navigationOptions: {
+        header: null
+      }
+    },
+    Feed: {
+      screen: Feed,
+      navigationOptions: {
+        header: null
+      }
+    }
   }
 );
 

@@ -8,6 +8,7 @@ import {
     Button,
     AsyncStorage
 } from 'react-native';
+import { isTSExpressionWithTypeArguments } from '@babel/types';
 
 const { width, height } = Dimensions.get('window');
 
@@ -21,6 +22,20 @@ export default class Login extends Component {
     }
 
     efetuarLogin() {
+
+        const login = this.state.login;
+        const senha = this.state.senha;
+
+        if (login == 'admin' && senha == 'admin') {
+            this.setState({ login: '', senha: '' });
+            this.inputLogin.clear();
+            this.inputSenha.clear();
+            this.props.navigation.navigate('Feed');
+        }
+        else {
+            this.setState({ mensagemDeErro: 'Usuário ou senha inválidos' })
+        }
+
         // const uri = 'https://instalura-api.herokuapp.com/api/public/login'
         // const requestInfo = {
         //     method: 'POST',
@@ -31,8 +46,8 @@ export default class Login extends Component {
         //     headers: new Headers({
         //         'Content-Type': 'application/json'
         //     })
-        this.props.navigation.navigate('Feed');
         // }
+        // 
         // fetch(uri, requestInfo)
         //     .then((response) => {
         //         if (response.ok) {
@@ -50,6 +65,7 @@ export default class Login extends Component {
                 <TextInput
                     placeholderTextColor="#ded1c1"
                     placeholder="Usuário"
+                    ref={ref => this.inputLogin = ref }
                     onChangeText={texto => this.setState({ login: texto })}
                     style={styles.input}
                     autoCapitalize="none"
@@ -58,6 +74,7 @@ export default class Login extends Component {
                 <TextInput
                     placeholderTextColor="#ded1c1"
                     placeholder="Senha"
+                    ref={ref => this.inputSenha = ref}
                     onChangeText={texto => this.setState({ senha: texto })}
                     style={styles.input}
                     secureTextEntry={true}
